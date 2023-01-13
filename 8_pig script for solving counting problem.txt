@@ -1,0 +1,20 @@
+﻿# Pig installation 
+    1. Download the zip file from the official Pig release site 
+    2. Extract the pig zip 
+       $ sudo tar –xf pig-0-17.0.tar.gx 
+    3. Moving the file 
+       $ mv pig-0-17-0 /home/Hadoop/pig 
+    4. Set the .bashrc file 
+       export PIG_HOME=/home/hadoop/pig
+export PATH =$PATH:/home/hadoop/pig/bin export PIG_CLASSPATH=$HADOOP_HOME/conf 
+    5. Verify installation
+$ pig –version 
+    6. Run pig locally
+$ pig –x local 
+# Pig script for word count problem 
+    1. Create a text file in /home/Hadoop/textfile.txt path and provide content $ nano /home/hadoop/textfile.txt 
+    2. Enter the following command in the terminal
+lines = LOAD ‘/home/hadoop/textfile.txt’ AS (line:chararray);
+words = FOREACH lines GENERATE FLATTEN(TOKENIZE(line)) as word; grouped = GROUP words BY word;
+wordcount = FOREACH grouped GENERATE group, COUNT(words); DUMP wordcount; 
+
